@@ -20,31 +20,43 @@ public class rotateList {
         // head
         // 1    -> 2 -> 3
         // temp
-        if (head == null) {
-            return null;
-        }
 
-        if (head.next == null) {
-            return head;
-        } else {
-
-            int i = 0;
-            ListNode temp = head;
-            
-            while (i < k) {
-                ListNode prev = head;
-
-                while (temp.next != null) {
-                    prev = temp;
-                    temp = temp.next;
-                }
-                prev.next = null;
-                temp.next = head;
-                head = temp;
-                i++;
-            }
+        if (head == null && head.next == null) {
             return head;
         }
+
+        // get length of head
+        int length = 1;
+        ListNode tail = head;
+
+        while (tail.next != null) {
+            tail = tail.next;
+            length++;
+        }
+
+        k %= length;
+
+        if (k == 0) {
+            return head;
+        }
+
+        tail.next = head;
+
+        ListNode newTail = head;
+
+        int step = length - k - 1;
+
+        for (int i = 0; i < step; i++) {
+            newTail = newTail.next;
+        }
+
+        ListNode newHead = newTail.next;
+
+        // cat vong
+        newTail.next = null;
+
+        return newHead;
+
     }
 
     static void printList(ListNode node) {
@@ -59,9 +71,9 @@ public class rotateList {
 
         ListNode lists = new ListNode(1);
         lists.next = new ListNode(2);
-        lists.next.next = new ListNode (3);
+        lists.next.next = new ListNode(3);
 
-        ListNode res = rotateRight(lists, 2);
+        ListNode res = rotateRight(lists, 1000000001);
 
         printList(res);
     }
