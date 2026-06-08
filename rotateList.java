@@ -21,7 +21,7 @@ public class rotateList {
         // 1    -> 2 -> 3
         // temp
 
-        if (head == null && head.next == null) {
+        if (head == null || head.next == null) {
             return head;
         }
 
